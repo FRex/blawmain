@@ -37,3 +37,7 @@ doesn't create a `WinMain` function for you (that you'll need when creating a
 
 If you're looking for a more comprehensive library to do similar things you can try
 [Boost.Nowide](https://www.boost.org/doc/libs/develop/libs/nowide/doc/html/index.html).
+
+On recent versions of Windows you can also set the process code page to UTF-8 to
+make the `char` taking APIs Unicode aware and accept UTF-8 args, read more on:
+[MSDN](https://docs.microsoft.com/en-us/windows/uwp/design/globalizing/use-utf8-code-page).
