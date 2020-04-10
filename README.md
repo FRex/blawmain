@@ -23,7 +23,8 @@ See `test.c` for an example usage.
 
 I wrote it mainly to cut down on repetition and copy pasting in my small
 portable pure C programs like [analyzepng](https://github.com/FRex/analyzepng),
-[topng](https://github.com/FRex/topng)
+[topng](https://github.com/FRex/topng),
+[binarypic](https://github.com/FRex/binarypic)
 and [pixel](https://github.com/FRex/pixelsum).
 
 This header lets you keep most of your code using UTF-8 in `char` strings but
