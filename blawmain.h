@@ -4,6 +4,8 @@
 
 #ifdef BLA_WMAIN_USE_WMAIN
 
+#define BLA_WMAIN_USING_WMAIN_BOOLEAN 1
+
 /* for WideCharToMultiByte and malloc */
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -44,6 +46,8 @@ int wmain(int argc, wchar_t ** argv)
 }
 
 #else
+
+#define BLA_WMAIN_USING_WMAIN_BOOLEAN 0
 
 int main(int argc, char ** argv)
 {
