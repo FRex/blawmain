@@ -1,13 +1,11 @@
-#ifndef _MSC_VER
+#ifdef _MSC_VER
+#define BLA_WMAIN_USE_WMAIN
+#endif
 
-int main(int argc, char ** argv)
-{
-    return BLA_WMAIN_FUNC(argc, argv);
-}
-
-#else
+#ifdef BLA_WMAIN_USE_WMAIN
 
 /* for WideCharToMultiByte and malloc */
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <stdlib.h>
 
@@ -43,6 +41,13 @@ int wmain(int argc, wchar_t ** argv)
     retcode = BLA_WMAIN_FUNC(argc, utf8argv);
     free(utf8argv);
     return retcode;
+}
+
+#else
+
+int main(int argc, char ** argv)
+{
+    return BLA_WMAIN_FUNC(argc, argv);
 }
 
 #endif
