@@ -22,10 +22,13 @@ static void print_binary(int idx, const char * str)
     printf("\n");
 }
 
+static int using_wmain(void);
+
 static int mymain(int argc, char ** argv)
 {
     int i;
 
+    printf("using_wmain = %d\n", using_wmain());
     for(i = 1; i < argc; ++i)
         print_binary(i, argv[i]);
 
@@ -34,3 +37,12 @@ static int mymain(int argc, char ** argv)
 
 #define BLA_WMAIN_FUNC mymain
 #include "blawmain.h"
+
+static int using_wmain(void)
+{
+#ifdef BLA_WMAIN_USE_WMAIN
+    return 1;
+#else
+    return 0;
+#endif
+}
