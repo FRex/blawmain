@@ -2,6 +2,10 @@
 #define BLA_WMAIN_USE_WMAIN
 #endif
 
+#if defined(BLA_WMAIN_FUNC3) && defined(BLA_WMAIN_FUNC)
+#error "both BLA_WMAIN_FUNC3 and BLA_WMAIN_FUNC defined"
+#endif
+
 #ifdef BLA_WMAIN_USE_WMAIN
 
 #define BLA_WMAIN_USING_WMAIN_BOOLEAN 1
@@ -40,7 +44,12 @@ int wmain(int argc, wchar_t ** argv)
         utf8ptrout += out;
     } /* for */
 
+#ifdef BLA_WMAIN_FUNC3
+    retcode = BLA_WMAIN_FUNC3(argc, utf8argv, argv);
+#else
     retcode = BLA_WMAIN_FUNC(argc, utf8argv);
+#endif
+
     free(utf8argv);
     return retcode;
 }
@@ -51,7 +60,11 @@ int wmain(int argc, wchar_t ** argv)
 
 int main(int argc, char ** argv)
 {
-    return BLA_WMAIN_FUNC(argc, argv);
+#ifdef BLA_WMAIN_FUNC3
+    retcode = BLA_WMAIN_FUNC3(argc, argv, NULL);
+#else
+    retcode = BLA_WMAIN_FUNC(argc, argv);
+#endif
 }
 
 #endif

@@ -5,7 +5,9 @@ program thats can take Unicode command line arguments.
 
 To use it: name your UTF-8 entry point function something else than `main`,
 don't create your own `wmain`, define `BLA_WMAIN_FUNC` to be the name of your
-main function and include the header (once, in a single .c or .cpp file only).
+main function and include the header (once, in a single .c or .cpp file only),
+if you want to receive (as third argument) the original wide argv, then use
+the define `BLA_WMAIN_FUNC3` instead.
 
 If macro `_MSC_VER` or `BLA_WMAIN_USE_WMAIN` is defined it will create an
 `int wmain(int argc, wchar_t ** argv)` function that allocates space using a
