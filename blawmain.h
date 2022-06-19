@@ -6,6 +6,16 @@
 #error "both BLA_WMAIN_FUNC3 and BLA_WMAIN_FUNC defined"
 #endif
 
+#if !(defined(BLA_WMAIN_FUNC3) || defined(BLA_WMAIN_FUNC))
+#error "BLA_WMAIN_FUNC or BLA_WMAIN_FUNC3 must be defined"
+#endif
+
+/*
+BLA_WMAIN_FUNC - same as normal int main(int argc, char ** argv);
+BLA_WMAIN_FUNC3 - like normal main but with extra argument for original argv
+int main(int argc, char ** argv, wchar_t ** wargv), NULL outside windows
+*/
+
 #ifdef BLA_WMAIN_USE_WMAIN
 
 #define BLA_WMAIN_USING_WMAIN_BOOLEAN 1
