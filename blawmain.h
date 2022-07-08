@@ -32,13 +32,14 @@ change its contents, set pointers to other strings, to NULL, change string conte
 It will be freed once your main returns, so tools like ASAN and valgrind will not report it as a leak. If the malloc at
 the start of the program fails (extremely unlikely) the return code is 111 and an error is printed on stderr.
 
-Conversion is done using WinAPI's WideCharToMultiByte.
+Conversion is done using WinAPI's WideCharToMultiByte so the results may differ by Windows version.
 
 If no conversion is done then argv is passed as is, no allocations. Your mains return (a single int
 or something that is implicitly convertible to an int) is forwarded to the OS.
 
 NOTE: the order of 1. and 2. matters, you must define your macro before including this file, so it can use it
 NOTE: in case of error "undefined reference to `WinMain'" with GCC on Windows make sure you pass -municode
+NOTE: see test.c for example usage
 
 */
 
