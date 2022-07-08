@@ -17,10 +17,11 @@ BLA_WMAIN_FUNC3 - like normal main but with extra argument for original argv
 int main(int argc, char ** argv, wchar_t ** wargv), NULL outside windows
 
 TO USE:
-1. include this header in some .c or .cpp file, usually (but its not mandatory) the one with your main
-2. define BLA_WMAIN_FUNC or BLA_WMAIN_FUNC3 - whichever you need, but only one of them (this is enforced by the preprocessor)
+1. define BLA_WMAIN_FUNC or BLA_WMAIN_FUNC3 - whichever you need, but only one of them (this is enforced by the preprocessor)
+2. include this header in some .c or .cpp file, usually (but its not mandatory) the one with your main
 3. allow the main or wmain from this file to be the entry point, and it will convert (if needed) and call your main
 
+NOTE: the order of 1. and 2. matters, you must define your macro before including this file, so it can use it
 NOTE: in case of error "undefined reference to `WinMain'" with GCC on Windows make sure you pass -municode
 
 */
