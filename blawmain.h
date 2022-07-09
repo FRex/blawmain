@@ -12,6 +12,8 @@
 
 /*
 
+https://github.com/FRex/blawmain
+
 BLA_WMAIN_FUNC - same as normal int main(int argc, char ** argv);
 BLA_WMAIN_FUNC3 - like normal main but with extra argument for original argv
 int main(int argc, char ** argv, wchar_t ** wargv), NULL outside windows
