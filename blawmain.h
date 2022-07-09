@@ -16,11 +16,13 @@ BLA_WMAIN_FUNC - same as normal int main(int argc, char ** argv);
 BLA_WMAIN_FUNC3 - like normal main but with extra argument for original argv
 int main(int argc, char ** argv, wchar_t ** wargv), NULL outside windows
 BLA_WMAIN_USING_WMAIN_BOOLEAN - macro defined to 1 if conversion is being done and 0 otherwise
+BLA_WMAIN_FORCE_OFF - if you define this macro, no conversion will ever take place
 
 TO USE:
 1. define BLA_WMAIN_FUNC or BLA_WMAIN_FUNC3 - whichever you need, but only one of them (this is enforced by the preprocessor)
 2. include this header in some .c or .cpp file, usually (but its not mandatory) the one with your main
 3. allow the main or wmain from this file to be the entry point, and it will convert (if needed) and call your main
+4. if you want to force the conversion to be off you can define BLA_WMAIN_FORCE_OFF
 
 If the UTF-16 to UTF-8 conversion is being used then BLA_WMAIN_USING_WMAIN_BOOLEAN will be defined to 1, and
 the third argument to BLA_WMAIN_FUNC3 will not be NULL, otherwise (Linux or in case of a problem on Windows)
@@ -42,6 +44,12 @@ NOTE: in case of error "undefined reference to `WinMain'" with GCC on Windows ma
 NOTE: see test.c for example usage
 
 */
+
+#ifdef BLA_WMAIN_FORCE_OFF
+#ifdef BLA_WMAIN_USE_WMAIN /* dont undef if its not defined, to not get a warning */
+#undef BLA_WMAIN_USE_WMAIN
+#endif
+#endif
 
 #ifdef BLA_WMAIN_USE_WMAIN
 
@@ -98,9 +106,9 @@ int wmain(int argc, wchar_t ** argv)
 int main(int argc, char ** argv)
 {
 #ifdef BLA_WMAIN_FUNC3
-    retcode = BLA_WMAIN_FUNC3(argc, argv, NULL);
+    return BLA_WMAIN_FUNC3(argc, argv, NULL);
 #else
-    retcode = BLA_WMAIN_FUNC(argc, argv);
+    return BLA_WMAIN_FUNC(argc, argv);
 #endif
 }
 

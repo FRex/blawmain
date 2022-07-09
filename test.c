@@ -2,6 +2,25 @@
 #include <windows.h>
 #include <fcntl.h>
 
+/* NOTE compile with:
+1. gcc -municode (might fail to find WinMain without the option)
+2. clang (no extra options)
+3. cl (no extra options)
+
+Then invoke this program with some Unicode arguments (like accented letters
+or any other non-latin/non-ASCII scripts and characters), to see what happens
+to them with and without conversion.
+
+For example on Windows without conversion on my system the latin based letters
+with diacritics are converted to their base ASCII form, and non-latin script
+characters are turned into question marks.
+
+Defined BLA_WMAIN_FORCE_OFF to force conversion off on Windows.
+
+Go to https://frex.github.io/unicode.html to explore Unicode more.
+
+*/
+
 static int mymain(int argc, char ** argv, wchar_t ** wargv);
 #define BLA_WMAIN_FUNC3 mymain
 #include "blawmain.h"
@@ -37,7 +56,8 @@ static int mymain(int argc, char ** argv, wchar_t ** wargv)
     {
         print_binary(i, argv[i]);
         printf("%d) '%s'\n", i, argv[i]);
-        printf("%d) 0x%x\n", i, wargv[i][0]);
+        if(wargv)
+            printf("%d) 0x%x\n", i, wargv[i][0]);
         puts("");
     }//for
 

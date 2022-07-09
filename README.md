@@ -29,6 +29,11 @@ portable pure C programs like [analyzepng](https://github.com/FRex/analyzepng),
 [binarypic](https://github.com/FRex/binarypic)
 and [pixel](https://github.com/FRex/pixelsum).
 
+Go to
+[https://frex.github.io/unicode.html](https://frex.github.io/unicode.html)
+and [unicode-analyze-page](https://github.com/FRex/unicode-analyze-page)
+to explore Unicode more, see what characters you have, etc.
+
 This header lets you keep most of your code using UTF-8 in `char` strings but
 you will still need to convert to UTF-16 `wchar_t` yourself to (for example) open
 a file with Unicode name on Windows using `_wfopen` or `CreateFileW`. So if
